@@ -52,7 +52,6 @@ def get_config_variables():
     os.system('export AWS_CONFIG_FILE=~/.aws/config')
     os.system('export AWS_SHARED_CREDENTIALS_FILE=~/.aws/credentials')
 
-    ARN = config.get('IAM_ROLE', 'ARN')
     BUCKET = config.get('S3', 'BUCKET')
     BUCKET_NAME = config.get('S3', 'BUCKET_NAME')
 
@@ -62,7 +61,7 @@ def get_config_variables():
 
     ClusterName = config.get('EMR', 'ClusterName')
 
-    return ARN, BUCKET, BUCKET_NAME, Ec2KeyName, Ec2SubnetId, pemFile, ClusterName
+    return BUCKET, BUCKET_NAME, Ec2KeyName, Ec2SubnetId, pemFile, ClusterName
 
 
 def createClients():
@@ -358,7 +357,7 @@ def main():
 
     update_workspace()
 
-    ARN, BUCKET, BUCKET_NAME, Ec2KeyName, Ec2SubnetId, pemFile, ClusterName = get_config_variables()
+    BUCKET, BUCKET_NAME, Ec2KeyName, Ec2SubnetId, pemFile, ClusterName = get_config_variables()
 
     ec2Resource, ec2Client, s3Client, s3Resource, iam, redshift, emr = createClients()
 
