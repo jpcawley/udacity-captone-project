@@ -215,7 +215,7 @@ def create_emr_cluster(client, key, subnetId, cluster):
                     'Market': 'ON_DEMAND',
                     'InstanceRole': 'CORE',
                     'InstanceType': 'm5.xlarge',
-                    'InstanceCount': 4,
+                    'InstanceCount': 1,
                     'EbsConfiguration': {
                         'EbsBlockDeviceConfigs': [
                             {

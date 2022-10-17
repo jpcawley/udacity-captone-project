@@ -462,14 +462,7 @@ def main():
     sc = spark.sparkContext
     sc._jsc.hadoopConfiguration().set("mapreduce.fileoutputcommitter.algorithm.version", "2")
     
-    # install python packages
-#     sc.install_pypi_package("pandas==0.23.2")
-#     sc.install_pypi_package("geopy==2.2.0")
-#     sc.install_pypi_package("certifi==2019.11.28")
-    
     wind_scale = saffir_simpson_wind_scale(spark, bucket)
-    
-    names_dim = process_name_data(spark, bucket)
     
     states_dim = process_state_data(spark, bucket)
     
@@ -480,7 +473,9 @@ def main():
     storms_dim = process_atlantic_storms_data(spark, bucket, headers_dim, stats_dim)
     named_storms_dim = named_atlantic_storms_locations(spark, bucket, atlantic_storms, states_dim)
     
-    people_and_storm_name_fact = names_by_person_and_storm(names_dim, named_storms_dim, wind_scale)
+    names_dim = process_name_data(spark, bucket)
+    
+    names_by_person_and_storm(names_dim, named_storms_dim, wind_scale)
     
     end_time = time.time()
 
