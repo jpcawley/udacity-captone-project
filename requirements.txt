@@ -1,0 +1,6 @@
+configparser==4.0.2
+DateTime==4.7
+geopy==1.23.0
+requests==2.24.0
+pandas==0.23.2
+certifi==2019.11.28
