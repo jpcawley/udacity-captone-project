@@ -15,6 +15,8 @@ Build an ETL pipeline that pulls publicly available state, baby name, and storm 
 9. capstone_data_dictionary.xlsx: Excel file with projects data dictionary
 ## Schema
 ![Schema](Capstone_Schema.png)
+## Data Dictionary
+![DDict](capstone_data_dictionary.xlsx)
 ## Prerequisites
 1. AWS IAM User with `AmazonS3ReadOnlyAccess` and `AdministratorAccess` permission policies
 2. Subnet Groups (with default VPC)
