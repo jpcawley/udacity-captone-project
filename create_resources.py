@@ -24,11 +24,6 @@ def update_workspace():
     os.system('pip install geopy')
     os.system('pip install s3fs')
 
-# def create_aws_session():
-#     session = boto3.session.Session(profile_name='default')
-#     return session
-
-
 def get_config_variables():
     ''' 
     Get configuration variables. 
@@ -49,8 +44,6 @@ def get_config_variables():
     # create ~/.aws/config file
     os.system(f'aws configure set default.region us-east-1; aws configure set AWS_ACCESS_KEY_ID "{AWS_ACCESS_KEY_ID}" ; \
                     aws configure set AWS_SECRET_ACCESS_KEY "{AWS_SECRET_ACCESS_KEY}"')
-    
-#     session = boto3.session.Session(profile_name='default')
 
     if not os.path.exists('/root/.aws'):
         path = '/root/.aws'
@@ -223,7 +216,7 @@ def create_emr_cluster(client, key, subnetId, cluster):
                     'Market': 'ON_DEMAND',
                     'InstanceRole': 'CORE',
                     'InstanceType': 'm5.xlarge',
-                    'InstanceCount': 2,
+                    'InstanceCount': 4,
                     'EbsConfiguration': {
                         'EbsBlockDeviceConfigs': [
                             {
@@ -365,8 +358,6 @@ def main():
 
     update_workspace()
 
-#     session = create_aws_session()
-
     ARN, BUCKET, BUCKET_NAME, Ec2KeyName, Ec2SubnetId, pemFile, ClusterName = get_config_variables()
 
     ec2Resource, ec2Client, s3Client, s3Resource, iam, redshift, emr = createClients()
@@ -380,10 +371,6 @@ def main():
     print('Writing storm data from a url to csv.\n')
 
     csvPath = get_storm_data('https://www.nhc.noaa.gov/data/hurdat/hurdat2-1851-2021-041922.txt')
-    
-#     compressed_storm_file, storms_with_landfall_file = pandasETL.main()
-    
-#     files = [compressed_storm_file, storms_with_landfall_file, 'raw_data/name_data_by_state/', jsonPath, csvPath]
 
     files = [jsonPath, csvPath, 'raw_data/name_data_by_state/', 'capstone_data_dictionary.xlsx']
 
